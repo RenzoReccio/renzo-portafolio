@@ -3,7 +3,7 @@ import ProjectTile from "./projectTile";
 
 const headInfo = {
   headline: "My Projects",
-  text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+  text: "Side projects with the latest technologies."
 }
 
 export const projectsArr: {
@@ -16,7 +16,7 @@ export const projectsArr: {
     id: 0,
     title: "E-Commerce",
     blurb: "E-Commerce made with Angular, NestJS and deployed in GCP",
-    link: "github.com"
+    link: "https://github.com/RenzoReccio/API.QyN"
   }
 ]
 
