@@ -13,8 +13,6 @@ export default function Home() {
   }, [])
 
   return (
-    <Layout>
       <HomeComponent />
-    </Layout> 
   )
 }
