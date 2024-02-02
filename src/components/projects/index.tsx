@@ -17,6 +17,12 @@ export const projectsArr: {
     title: "E-Commerce",
     blurb: "E-Commerce made with Angular, NestJS and deployed in GCP",
     link: "https://github.com/RenzoReccio/API.QyN"
+  },
+  {
+    id: 1,
+    title: "Collatz Conjecture",
+    blurb: "Project with Golang and NextJS explaining Collatz conjecture in a linear chart",
+    link: "projects/collatz-conjecture"
   }
 ]
 

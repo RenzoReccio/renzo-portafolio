@@ -15,7 +15,9 @@
     "npm": "^10.3.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.0.1"
+    "react-icons": "^5.0.1",
+    "recharts": "^2.10.4",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/node": "^20",

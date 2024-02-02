@@ -35,7 +35,7 @@ export default function StickyHeader(props: HeaderProps) {
       <div className=" w-1/2 pb-2 mt-2 sticky top-4 flex flex-row items-center justify-center ml-24 self-end md:self-center">
       <div className="border shadow-sm px-8 rounded-full hidden md:flex flex-row justify-evenly items-center text-slate-800 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-600">
         {menuLinks.map(i => (
-          <Link className={String(pathName).slice(1) === i.page.toLowerCase() 
+          <Link className={String(pathName).split('/')[1] === i.page.toLowerCase() 
           ? " px-2 z-40 py-2 text-emerald-500 border-b bg-gradient dark:bg-gradient  border-0 "
           : " px-2 py-2 hover:text-emerald-500"} href={i.link} key={i.title}>
             {i.title}

@@ -12,7 +12,7 @@ export default function Hero() {
       <p className="py-4 " data-testid="hero-blurb">
       As a Fullstack Developer, I like to build all kind of projects in different programming languages.
       </p>
-      <div className="p-4 flex flex-row text-2xl " data-testid="social-links">
+      <div className="p-4 flex flex-row text-2xl" data-testid="social-links">
         <Link className="p-1 m-2 dark:hover:text-zinc-200 hover:text-zinc-600" target="_blank" href={"https://github.com/RenzoReccio"} data-testid="github-link">
           <AiOutlineGithub />
         </Link>
