@@ -23,6 +23,12 @@ export const projectsArr: {
     title: "Collatz Conjecture",
     blurb: "Project with Golang and NextJS explaining Collatz conjecture in a linear chart",
     link: "projects/collatz-conjecture"
+  },
+  {
+    id: 2,
+    title: "Golang Azure Worker",
+    blurb: "Project with Golang that process AzureDevOps webhooks events",
+    link: "https://github.com/RenzoReccio/project-management.worker"
   }
 ]
 
