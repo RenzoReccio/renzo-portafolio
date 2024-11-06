@@ -50,9 +50,6 @@ export default function WorkHistory() {
           </div>
         ))}
       </div>
-      <Link className="rounded bg-slate-50 hover:bg-slate-100 text-center p-2 text-sm dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200" href="/" data-testid="cv-link">
-        Download CV
-      </Link>
     </div>
   )
 }
