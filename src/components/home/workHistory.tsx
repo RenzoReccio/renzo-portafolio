@@ -9,9 +9,15 @@ export const workArr: {
   id: string
 }[] = [
   {
+    company: "Encora",
+    position: "Software Engineer II",
+    years: "2024-present",
+    id: "job-3"
+  },
+  {
     company: "Globant",
     position: "Fullstack Developer",
-    years: "2022-present",
+    years: "2022-2024",
     id: "job-0"
   },
   {
