@@ -2,7 +2,6 @@ import Link from "next/link";
 import { menuLinks } from "./menu";
 import { BsMoonStars, BsSun } from "react-icons/bs";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 
 interface HeaderProps {
@@ -31,8 +30,8 @@ export default function StickyHeader(props: HeaderProps) {
 
 
   return (
-    <div className={showMenu ? "blur bg-white body-width dark:bg-zinc-900 w-full z-20 flex flex-col  items-center" :" bg-white body-width dark:bg-zinc-900 w-full z-20 flex flex-col  items-center"}>
-      <div className=" w-1/2 pb-2 mt-2 sticky top-4 flex flex-row items-center justify-center ml-24 self-end md:self-center">
+    <div className={showMenu ? "rounded-t-[20px] blur bg-white body-width dark:bg-zinc-900 w-full z-20 flex flex-col  items-center" :"rounded-t-[20px] bg-white body-width dark:bg-zinc-900 w-full z-20 flex flex-col  items-center"}>
+      <div className="w-1/2 pb-2 mt-2 sticky top-4 flex flex-row items-center justify-center ml-24 self-end md:self-center">
       <div className="border shadow-sm px-8 rounded-full hidden md:flex flex-row justify-evenly items-center text-slate-800 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-600">
         {menuLinks.map(i => (
           <Link className={String(pathName).split('/')[1] === i.page.toLowerCase() 
@@ -42,7 +41,7 @@ export default function StickyHeader(props: HeaderProps) {
           </Link>
         ))}
       </div>
-      <div className=" flex flex-row ">
+      <div className="flex flex-row ">
       <button className=" md:hidden text-slate-800 font-normal hover:bg-slate-100 dark:hover:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-600 border shadow-sm rounded-full h-10 px-4 mx-2" data-testid="menu-btn" onClick={() => setShowMenu()}>
         Menu
       </button>

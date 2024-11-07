@@ -6,16 +6,15 @@ const footerLinks: {
   link: string
 }[] = [
   {
-    title: "Projects",
-    id: "projects-link",
-    link: "/projects"
-  },
-  {
     title: "Articles",
     id: "articles-link",
     link: "/articles"
+  },
+  {
+    title: "Projects",
+    id: "projects-link",
+    link: "/projects"
   }
-    
 ]
 
 export default function Footer() {
@@ -29,7 +28,7 @@ export default function Footer() {
         ))}
       </div>
       <p className="font-light text-zinc-400 dark:text-zinc-500 " data-testid="copyright-info">
-        Renzo Reccio 2023
+        Renzo Reccio {(new Date()).getFullYear()}
       </p>
     </div>
   )
