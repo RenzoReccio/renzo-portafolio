@@ -2,48 +2,50 @@ import PageHead from "../layout/pageHead";
 import ProjectTile from "./projectTile";
 
 const headInfo = {
-  headline: "My Projects",
-  text: "Side projects with the latest technologies."
-}
+  headline: "Featured Projects",
+  text: "Production-grade applications, distributed backends, and interactive experiments built with modern architectures.",
+  eyebrow: "Portfolio",
+};
 
 export const projectsArr: {
-  id: number
-  title: string
-  blurb: string
-  link: string
+  id: number;
+  title: string;
+  blurb: string;
+  link: string;
+  tag?: string;
 }[] = [
   {
     id: 0,
-    title: "E-Commerce",
-    blurb: "E-Commerce made with Angular, NestJS and deployed in GCP",
-    link: "https://github.com/RenzoReccio/API.QyN"
+    title: "E-Commerce Cloud Platform",
+    blurb: "Full-fledged e-commerce architecture engineered with Angular, NestJS, and deployed natively on Google Cloud Platform.",
+    link: "https://github.com/RenzoReccio/API.QyN",
+    tag: "Cloud & Microservices",
   },
   {
     id: 1,
-    title: "Collatz Conjecture",
-    blurb: "Project with Golang and NextJS explaining Collatz conjecture in a linear chart",
-    link: "projects/collatz-conjecture"
+    title: "Collatz Conjecture Visualizer",
+    blurb: "Interactive mathematical visualization built with Golang and Next.js, modeling the 3n + 1 convergence dynamics.",
+    link: "/projects/collatz-conjecture",
+    tag: "Data & Next.js",
   },
   {
     id: 2,
     title: "Golang Azure Worker",
-    blurb: "Project with Golang that process AzureDevOps webhooks events",
-    link: "https://github.com/RenzoReccio/project-management.worker"
-  }
-]
-
+    blurb: "Event-driven asynchronous service built with Golang to process high-throughput Azure DevOps webhook pipelines.",
+    link: "https://github.com/RenzoReccio/project-management.worker",
+    tag: "Distributed Systems",
+  },
+];
 
 export default function Projects() {
   return (
-    <div data-testid="projects-index">
+    <div data-testid="projects-index" className="space-y-8">
       <PageHead {...headInfo} />
-      <div className="flex flex-row flex-wrap">
-        {projectsArr.map((i) => (
-          <div key={i.id} className="md:w-1/2 px-2">
-            <ProjectTile {...i} />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projectsArr.map((item) => (
+          <ProjectTile key={item.id} {...item} />
         ))}
       </div>
     </div>
-  )
+  );
 }

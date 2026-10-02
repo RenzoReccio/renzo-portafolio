@@ -1,70 +1,119 @@
+"use client";
+
 import Link from "next/link";
 import { menuLinks } from "./menu";
 import { BsMoonStars, BsSun } from "react-icons/bs";
+import { HiMenuAlt4 } from "react-icons/hi";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface HeaderProps {
-  setShowMenu: () => void
-  showMenu: boolean
-  offset: number
+  setShowMenu: () => void;
+  showMenu: boolean;
+  offset: number;
 }
 
 export default function StickyHeader(props: HeaderProps) {
-  const { setShowMenu, showMenu, offset } = props
-  const pathName = usePathname()
+  const { setShowMenu, showMenu } = props;
+  const pathName = usePathname();
+  const [isDark, setIsDark] = useState<boolean>(false);
 
-
-  const offsetFormula = offset < 100 ? 100 - (offset/2): 50
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   const handleToggle = () => {
-    if (!localStorage.theme){
-      document.documentElement.classList.add('dark')
-      localStorage.setItem("theme", "dark")
+    if (!document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsDark(true);
     } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.removeItem("theme")
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setIsDark(false);
     }
-    
-  }
+  };
 
+  const isActive = (link: string) => {
+    if (link === "/" && pathName === "/") return true;
+    if (link !== "/" && pathName?.startsWith(link)) return true;
+    return false;
+  };
 
   return (
-    <div className={showMenu ? "rounded-t-[20px] blur bg-white body-width dark:bg-zinc-900 w-full z-20 flex flex-col  items-center" :"rounded-t-[20px] bg-white body-width dark:bg-zinc-900 w-full z-20 flex flex-col  items-center"}>
-      <div className="w-1/2 pb-2 mt-2 sticky top-4 flex flex-row items-center justify-center ml-24 self-end md:self-center">
-      <div className="border shadow-sm px-8 rounded-full hidden md:flex flex-row justify-evenly items-center text-slate-800 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-600">
-        {menuLinks.map(i => (
-          <Link className={String(pathName).split('/')[1] === i.page.toLowerCase() 
-          ? " px-2 z-40 py-2 text-emerald-500 border-b bg-gradient dark:bg-gradient  border-0 "
-          : " px-2 py-2 hover:text-emerald-500"} href={i.link} key={i.title}>
-            {i.title}
-          </Link>
-        ))}
-      </div>
-      <div className="flex flex-row ">
-      <button className=" md:hidden text-slate-800 font-normal hover:bg-slate-100 dark:hover:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-600 border shadow-sm rounded-full h-10 px-4 mx-2" data-testid="menu-btn" onClick={() => setShowMenu()}>
-        Menu
-      </button>
-      <button className=" hover:bg-slate-100 border shadow-sm rounded-full text-xl h-10 px-4 mx-2 dark:hover:bg-zinc-800 dark:text-emerald-300 dark:border-zinc-600" data-testid="night-toggle" onClick={() => handleToggle()}>
-        <div className="hidden dark:flex" data-testid="moon-icon">
-          <BsMoonStars />
+    <header className="sticky top-3.5 z-50 w-full px-4 sm:px-6 flex justify-center pointer-events-none">
+      <div className="pointer-events-auto ui-nav rounded-full px-3.5 sm:px-4 py-2 flex items-center justify-between w-full max-w-3xl transition-all duration-300">
+        {/* Left: Brand mark & Identity */}
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 group apple-press focus:outline-none"
+          aria-label="Renzo Reccio Home"
+        >
+          <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-black/10 dark:ring-white/20 shadow-sm transition-transform duration-300 group-hover:scale-105">
+            <Image
+              src="/images/profile.jpg"
+              alt="Renzo Reccio"
+              fill
+              className="object-cover"
+              sizes="32px"
+              priority
+            />
+          </div>
+          <span className="font-semibold text-sm tracking-tight text-ink flex items-center gap-1 group-hover:text-amber-500 transition-colors">
+            <span className="text-amber-500 font-bold font-mono">/</span>
+            <span>renzo</span>
+          </span>
+        </Link>
+
+        {/* Center: Segmented Pill Navigation (Desktop) */}
+        <nav
+          className="hidden md:flex items-center p-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.04] dark:border-white/[0.06]"
+          aria-label="Primary Navigation"
+        >
+          {menuLinks.map((item) => {
+            const active = isActive(item.link);
+            return (
+              <Link
+                key={item.title}
+                href={item.link}
+                className={`relative px-4 py-1.5 text-xs font-medium rounded-full transition-all duration-200 apple-press ${active
+                  ? "bg-amber-300 text-zinc-950 font-bold shadow-sm"
+                  : "text-muted hover:text-ink hover:bg-black/5 dark:hover:bg-white/5"
+                  }`}
+              >
+                {item.title}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right: Actions (Theme Toggle & Mobile Menu) */}
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={handleToggle}
+            className="w-8 h-8 rounded-full flex items-center justify-center text-ink hover:bg-black/5 dark:hover:bg-white/10 apple-press transition-colors duration-200 focus:outline-none"
+            title="Toggle theme"
+            aria-label="Toggle dark/light mode"
+            data-testid="night-toggle"
+          >
+            {isDark ? (
+              <BsSun className="text-amber-400 text-sm transition-transform duration-300 rotate-0 hover:rotate-45" />
+            ) : (
+              <BsMoonStars className="text-zinc-700 text-xs transition-transform duration-300 hover:-rotate-12" />
+            )}
+          </button>
+
+          <button
+            onClick={() => setShowMenu()}
+            className="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-ink hover:bg-black/5 dark:hover:bg-white/10 apple-press focus:outline-none"
+            aria-label="Toggle menu"
+            data-testid="menu-btn"
+          >
+            <HiMenuAlt4 className="text-lg" />
+          </button>
         </div>
-        <div className="dark:hidden flex" data-testid="sun-icon">
-          <BsSun />
-        </div>
-      </button>
       </div>
-      </div>
-      {pathName === "/"
-      ? <div className={offset > 100 
-          ? " self-start mt-16 ml-2 sm:ml-12 rounded-full overflow-hidden flex items-center p-1 shadow" 
-          : " self-start mt-16 ml-2 sm:ml-12 rounded-full overflow-hidden flex items-center p-1"}>
-        <Image className="rounded-full " src={"/images/profile.jpg"} width={offsetFormula} height={offsetFormula} alt="Profile pic" title="Profile pic" />
-      </div>
-      : <Link href="/" className="absolute self-start top-2 ml-12 rounded-full overflow-hidden flex items-center p-1 shadow">
-          <Image className="rounded-full " src={"/images/profile.jpg"} width={50} height={50} alt="Profile pic" title="Profile pic" />
-      </Link>
-      }
-    </div>
-  )
+    </header>
+  );
 }

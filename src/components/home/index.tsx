@@ -1,20 +1,20 @@
-import React from "react"
-import Hero from "./hero"
-import DevTool from "./devTool"
-import WorkHistory from "./workHistory"
+import React from "react";
+import Hero from "./hero";
+import DevTool from "./devTool";
+import WorkHistory from "./workHistory";
 
 export default function HomeComponent() {
-
-
   return (
-    <div data-testid="home-component">
+    <div className="space-y-12 sm:space-y-16" data-testid="home-component">
       <Hero />
-      <div className="lg:flex flex-row">
-        <DevTool />
-        <div className="lg:w-1/2 lg:my-8 my-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="lg:col-span-7">
+          <DevTool />
+        </div>
+        <div className="lg:col-span-5 sticky top-24">
           <WorkHistory />
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,17 +1,18 @@
-import React from "react"
-import PageHead from "../layout/pageHead"
-import Posts from "./posts"
+import React from "react";
+import PageHead from "../layout/pageHead";
+import Posts from "./posts";
 
 const headInfo = {
-  headline: "My posts",
-  text: "I enjoy writing on my free time about programming and all kind of stuff."
-}
+  headline: "Articles & Writing",
+  text: "Technical essays and guides on software engineering, conversational AI, and scalable frontend architectures.",
+  eyebrow: "Thought Leadership",
+};
 
 export default function Articles() {
   return (
-    <div data-testid="articles-div">
+    <div data-testid="articles-div" className="space-y-8">
       <PageHead {...headInfo} />
       <Posts />
     </div>
-  )
+  );
 }

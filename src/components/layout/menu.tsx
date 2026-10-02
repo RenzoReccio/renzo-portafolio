@@ -1,47 +1,83 @@
-import Link from "next/link"
-import { AiOutlineClose } from "react-icons/ai"
+"use client";
+
+import Link from "next/link";
+import { AiOutlineClose } from "react-icons/ai";
+import { FiChevronRight, FiHome, FiFileText, FiLayers } from "react-icons/fi";
 
 interface MenuProps {
-  setShowMenu: (arg: boolean) => void
+  setShowMenu: (arg: boolean) => void;
 }
 
-export const menuLinks: {
-  title: string
-  link: string,
-  page: string
-}[] = [
+export const menuLinks = [
   {
     title: "Home",
-    page: "",    
-    link: "/"
+    page: "",
+    link: "/",
+    icon: FiHome,
   },
   {
     title: "Articles",
     page: "Articles",
-    link: "/articles"
+    link: "/articles",
+    icon: FiFileText,
   },
   {
     title: "Projects",
     page: "Projects",
-    link: "/projects"
-  }
-]
+    link: "/projects",
+    icon: FiLayers,
+  },
+];
 
 export default function Menu(props: MenuProps) {
-  const { setShowMenu } = props
-  return(
-    <div className="shadow p-6 rounded-2xl w-full mt-8 absolute z-20 bg-white text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:border dark:border-zinc-800" data-testid="menu-div">
-      <div className="mb-2 flex flex-row justify-between dark:text-zinc-400">
-        <h2 className=" text-sm">Navigation</h2>
-        <button className="text-lg dark:hover:text-zinc-300" onClick={() => setShowMenu(false)} data-testid="close-btn">
-          <AiOutlineClose />
-        </button>
+  const { setShowMenu } = props;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-20 bg-black/30 dark:bg-black/60 backdrop-blur-md transition-opacity duration-300 animate-in fade-in"
+      onClick={() => setShowMenu(false)}
+    >
+      <div
+        className="w-full max-w-sm ui-nav rounded-3xl p-5 shadow-2xl border border-rule overflow-hidden transform transition-all duration-300"
+        onClick={(e) => e.stopPropagation()}
+        data-testid="menu-div"
+      >
+        <div className="flex items-center justify-between pb-3 border-b border-rule">
+          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-muted">
+            Navigation
+          </span>
+          <button
+            onClick={() => setShowMenu(false)}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-muted hover:text-ink hover:bg-black/5 dark:hover:bg-white/10 apple-press"
+            data-testid="close-btn"
+            aria-label="Close menu"
+          >
+            <AiOutlineClose className="text-sm" />
+          </button>
+        </div>
+
+        <nav className="mt-2 divide-y divide-rule/60">
+          {menuLinks.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.title}
+                href={item.link}
+                onClick={() => setShowMenu(false)}
+                className="flex items-center justify-between py-3.5 px-2 rounded-xl text-ink hover:bg-paper-3 apple-press transition-colors duration-150 group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-paper-3 flex items-center justify-center text-muted group-hover:text-amber-500 transition-colors">
+                    <Icon className="text-base" />
+                  </div>
+                  <span className="text-sm font-semibold">{item.title}</span>
+                </div>
+                <FiChevronRight className="text-muted text-sm group-hover:translate-x-0.5 group-hover:text-amber-500 transition-transform" />
+              </Link>
+            );
+          })}
+        </nav>
       </div>
-      {menuLinks.map(i => (
-        <Link href={i.link} key={i.title}>
-          <p className="font-light border-b dark:border-zinc-800 py-2 my-1 px-2">{i.title}</p>
-        </Link>
-      ))}
     </div>
-  )
+  );
 }
